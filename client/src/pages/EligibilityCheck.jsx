@@ -148,7 +148,7 @@ export default function EligibilityCheck() {
                 zScore={input?.zScore}
                 probabilityPercent={r.probabilityPercent}
                 probabilityLabel={r.probabilityLabel}
-                cutoffs3Years={r.cutoffs3Years}
+                cutoffsTrend={r.cutoffsTrend || r.cutoffs3Years}
                 onViewTrend={() => setTrendProgram(r)}
                 index={i}
               />
@@ -168,7 +168,7 @@ export default function EligibilityCheck() {
               <button className="btn secondary" style={{ fontSize: 12, padding: "5px 12px" }} onClick={() => setTrendProgram(null)}>Close</button>
             </div>
             <TrendChart
-              cutoffs={trendProgram.cutoffs3Years}
+              cutoffs={trendProgram.cutoffsTrend || trendProgram.cutoffs3Years}
               studentZScore={input?.zScore}
               programName={trendProgram.programName}
             />

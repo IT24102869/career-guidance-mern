@@ -5,6 +5,7 @@ import { connectDB } from "../config/db.js";
 
 const seedData = [
   {
+    _id: new mongoose.Types.ObjectId("699b297eb8ad0bd2944ee331"),
     title: "BSc (Hons) in Information Technology",
     provider: "SLIIT",
     type: "private",
@@ -34,6 +35,7 @@ const seedData = [
     ],
   },
   {
+    _id: new mongoose.Types.ObjectId("699b297eb8ad0bd2944ee33c"),
     title: "BSc in Computer Science",
     provider: "NIBM",
     type: "private",
@@ -62,6 +64,7 @@ const seedData = [
     ],
   },
   {
+    _id: new mongoose.Types.ObjectId("699da5fd1f3cc38a49c02d0c"),
     title: "National Diploma in Engineering Technology",
     provider: "NAITA",
     type: "diploma",

@@ -74,12 +74,12 @@ export async function checkEligibility(req, res) {
       const cutoffs = await ZScoreTable.find({
         degreeProgramId: program._id,
         district: filterDistrict,
-        year: { $in: [2021, 2022, 2023] },
+        year: { $in: [2020, 2021, 2022, 2023, 2024, 2025] },
       }).sort({ year: 1 });
 
       if (cutoffs.length === 0) continue;
 
-      const cutoffs3Years = cutoffs.map((c) => ({
+      const cutoffsTrend = cutoffs.map((c) => ({
         year: c.year,
         cutoffZScore: c.cutoffZScore,
       }));
@@ -105,7 +105,7 @@ export async function checkEligibility(req, res) {
           diff: +diff.toFixed(4),
           probabilityPercent,
           probabilityLabel,
-          cutoffs3Years,
+          cutoffsTrend,
         });
       }
     }
@@ -132,7 +132,7 @@ export async function checkEligibility(req, res) {
           diff: r.diff,
           probabilityPercent: r.probabilityPercent,
           probabilityLabel: r.probabilityLabel,
-          cutoffs3Years: r.cutoffs3Years,
+          cutoffsTrend: r.cutoffsTrend,
         })),
       });
     }
@@ -169,7 +169,7 @@ export async function getTrendData(req, res) {
     const cutoffs = await ZScoreTable.find({
       degreeProgramId,
       district,
-      year: { $in: [2021, 2022, 2023] },
+      year: { $in: [2020, 2021, 2022, 2023, 2024, 2025] },
     }).sort({ year: 1 });
 
     const program = await DegreeProgram.findById(degreeProgramId).populate("universityId");

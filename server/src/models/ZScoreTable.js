@@ -13,7 +13,7 @@ const zScoreTableSchema = new mongoose.Schema({
   },
   year: {
     type: Number,
-    enum: [2021, 2022, 2023, 2024, 2025],
+    enum: [2020, 2021, 2022, 2023, 2024, 2025],
     required: true,
   },
   district: { type: String, required: true, trim: true },

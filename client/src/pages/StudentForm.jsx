@@ -14,7 +14,7 @@ const DISTRICTS = [
   "Monaragala", "Ratnapura", "Kegalle",
 ];
 
-const INITIAL = { fullName: "", email: "", stream: "", district: "", zScore: "", year: "2023" };
+const INITIAL = { fullName: "", email: "", stream: "", district: "", zScore: "", year: "2024" };
 
 export default function StudentForm() {
   const { user } = useAuth();
@@ -121,9 +121,12 @@ export default function StudentForm() {
           <div className="form-group">
             <label className="small"><strong>Exam Year</strong></label>
             <select className="input" name="year" value={form.year} onChange={handleChange}>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
               <option value="2023">2023</option>
               <option value="2022">2022</option>
               <option value="2021">2021</option>
+              <option value="2020">2020</option>
             </select>
             {errors.year && <span className="error">{errors.year}</span>}
           </div>

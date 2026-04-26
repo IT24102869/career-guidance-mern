@@ -29,10 +29,30 @@ export default function PathComparison() {
   async function loadComparedPaths() {
     setLoading(true);
     try {
-      const results = await Promise.all(
-        compareIds.map((id) => api.get(`/api/alternatives/${id}`).then((r) => r.data).catch(() => null))
+      const validResults = [];
+      const invalidIds = [];
+
+      await Promise.all(
+        compareIds.map((id) =>
+          api.get(`/api/alternatives/${id}`)
+            .then((r) => {
+              if (r.data) validResults.push(r.data);
+            })
+            .catch((err) => {
+              if (err.response?.status === 404) {
+                invalidIds.push(id);
+              }
+            })
+        )
       );
-      setPaths(results.filter(Boolean));
+
+      if (invalidIds.length > 0) {
+        const remaining = compareIds.filter((id) => !invalidIds.includes(id));
+        setCompareIds(remaining);
+        localStorage.setItem("comparePaths", JSON.stringify(remaining));
+      }
+
+      setPaths(validResults);
     } catch {
       /* ignore */
     } finally {

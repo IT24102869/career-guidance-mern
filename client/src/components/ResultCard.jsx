@@ -18,7 +18,7 @@ export default function ResultCard({
   zScore,
   probabilityPercent,
   probabilityLabel,
-  cutoffs3Years,
+  cutoffsTrend,
   onViewTrend,
   index = 0,
 }) {
@@ -74,9 +74,9 @@ export default function ResultCard({
         </div>
       )}
 
-      {cutoffs3Years && cutoffs3Years.length > 0 && (
+      {cutoffsTrend && cutoffsTrend.length > 0 && (
         <div className="elig-mini-trend">
-          {cutoffs3Years.map((c) => (
+          {cutoffsTrend.map((c) => (
             <span key={c.year} className="small">
               {c.year}: <strong>{c.cutoffZScore?.toFixed(2)}</strong>
             </span>
