@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const CAREER_INFO = {
   IT: { title: "Information Technology", desc: "Software development, cybersecurity, data science, cloud computing, and AI.", color: "#3b82f6", icon: "💻" },

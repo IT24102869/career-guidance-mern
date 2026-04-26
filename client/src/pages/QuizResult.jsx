@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { api } from "../lib/api.js";
 import { useAuth } from "../state/auth.jsx";
 import CareerSuggestion from "../components/CareerSuggestion.jsx";
