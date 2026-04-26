@@ -85,7 +85,7 @@ function Layout({ children }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 group transition-transform hover:scale-105">
             <img 
-              src="/logo.png" 
+              src="/favicon.png" 
               alt="Logo" 
               className="w-12 h-12 object-contain group-hover:rotate-[-6deg] transition-transform" 
             />
@@ -224,7 +224,7 @@ function Layout({ children }) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             <div className="space-y-6">
               <Link to="/" className="flex items-center gap-2 group">
-                <img src="/logo.png" alt="Logo" className="w-10 h-10 object-contain" />
+                <img src="/favicon.png" alt="Logo" className="w-10 h-10 object-contain" />
                 <span className="text-white font-bold text-xl">Career Guidance</span>
               </Link>
               <p className="text-slate-400 text-sm leading-relaxed">
