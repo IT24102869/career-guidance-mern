@@ -4,15 +4,42 @@ import { motion } from "framer-motion";
 import { api, API_URL } from "../lib/api.js";
 import { useAuth } from "../state/auth.jsx";
 
+const IdIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 10h2" />
+    <path d="M16 14h2" />
+    <path d="M6.17 15a3 3 0 0 1 5.66 0" />
+    <circle cx="9" cy="11" r="2" />
+    <rect x="2" y="5" width="20" height="14" rx="2" />
+  </svg>
+);
+
+const AtIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+  </svg>
+);
+
+const KeyIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m21 2-2 2" />
+    <circle cx="10" cy="14" r="8" />
+    <path d="m21 2-2 2" />
+    <path d="m21 2-9.6 9.6" />
+    <path d="m19 10 2-2" />
+  </svg>
+);
+
 const EyeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
     <circle cx="12" cy="12" r="3" />
   </svg>
 );
 
 const EyeOffIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
     <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
     <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
@@ -72,32 +99,44 @@ export default function Register() {
         transition={{ duration: 0.5 }}
       >
         {/* Left Side - Illustration/Branding */}
-        <div className="md:w-5/12 bg-indigo-600 px-10 py-16 text-white flex flex-col justify-center relative overflow-hidden text-center md:text-left">
+        <div className="md:w-5/12 bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-900 px-10 py-16 text-white flex flex-col justify-center relative overflow-hidden text-center md:text-left">
           {/* Decorative shapes */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-1/3 -translate-y-1/3 blur-3xl opacity-50" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-400/20 rounded-full -translate-x-1/3 translate-y-1/3 blur-3xl opacity-30" />
           
           <div className="relative z-10 space-y-8">
-            <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-4xl mx-auto md:mx-0 backdrop-blur-md border border-white/10 shadow-xl">
-              🚀
-            </div>
+            <motion.div 
+              className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-4xl mx-auto md:mx-0 backdrop-blur-md border border-white/10 shadow-xl"
+              whileHover={{ rotate: -360, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            >
+              🎓
+            </motion.div>
             <div className="space-y-4">
-              <h2 className="text-4xl font-black tracking-tight leading-tight">Start Your Journey</h2>
+              <h2 className="text-4xl font-black tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-indigo-200">
+                Start Your Journey
+              </h2>
               <p className="text-indigo-100 text-lg leading-relaxed font-medium">
                 Create an account to discover personalized career paths and opportunities.
               </p>
             </div>
             <div className="pt-8 flex flex-col gap-4">
-               <div className="flex items-center gap-3 text-sm text-indigo-100">
-                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white text-[10px]">✨</span>
+               <div className="flex items-center gap-3 text-sm text-indigo-50 font-medium">
+                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </span>
                   Free Career Assessment
                </div>
-               <div className="flex items-center gap-3 text-sm text-indigo-100">
-                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white text-[10px]">✨</span>
+               <div className="flex items-center gap-3 text-sm text-indigo-50 font-medium">
+                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </span>
                   AI Skill Analysis
                </div>
-               <div className="flex items-center gap-3 text-sm text-indigo-100">
-                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white text-[10px]">✨</span>
+               <div className="flex items-center gap-3 text-sm text-indigo-50 font-medium">
+                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-white shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </span>
                   Verified Certifications
                </div>
             </div>
@@ -118,14 +157,16 @@ export default function Register() {
             </div>
 
             <form onSubmit={onSubmit} className="space-y-5">
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 ml-1">Full Name</label>
-                <div className="relative group">
-                  <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-indigo-500 transition-colors">
-                    👤
-                  </span>
+              <div className="space-y-2 group">
+                <div className="flex items-center gap-2 ml-1 text-slate-400 group-focus-within:text-indigo-500 transition-colors font-semibold">
+                  <div className="text-cyan-500 bg-cyan-50 p-1.5 rounded-lg transition-colors group-focus-within:bg-indigo-50 group-focus-within:text-indigo-500">
+                    <IdIcon />
+                  </div>
+                  <label className="text-sm font-bold text-slate-700">Full Name</label>
+                </div>
+                <div className="relative">
                   <input
-                    className="input pl-11"
+                    className="input"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Your full name"
@@ -134,14 +175,16 @@ export default function Register() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
-                <div className="relative group">
-                  <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-indigo-500 transition-colors">
-                    📧
-                  </span>
+              <div className="space-y-2 group">
+                <div className="flex items-center gap-2 ml-1 text-slate-400 group-focus-within:text-indigo-500 transition-colors font-semibold">
+                  <div className="text-indigo-500 bg-indigo-50 p-1.5 rounded-lg group-focus-within:ring-2 ring-indigo-200">
+                    <AtIcon />
+                  </div>
+                  <label className="text-sm font-bold text-slate-700">Email Address</label>
+                </div>
+                <div className="relative">
                   <input
-                    className="input pl-11"
+                    className="input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@email.com"
@@ -151,14 +194,16 @@ export default function Register() {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 ml-1">Password</label>
-                <div className="relative group">
-                  <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-indigo-500 transition-colors">
-                    🔒
-                  </span>
+              <div className="space-y-2 group">
+                <div className="flex items-center gap-2 ml-1 text-slate-400 group-focus-within:text-indigo-500 transition-colors font-semibold">
+                  <div className="text-amber-500 bg-amber-50 p-1.5 rounded-lg group-focus-within:bg-indigo-50 group-focus-within:text-indigo-500">
+                    <KeyIcon />
+                  </div>
+                  <label className="text-sm font-bold text-slate-700">Password</label>
+                </div>
+                <div className="relative">
                   <input
-                    className="input pl-11 pr-12"
+                    className="input pr-12"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}

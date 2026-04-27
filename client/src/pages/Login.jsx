@@ -4,15 +4,32 @@ import { motion } from "framer-motion";
 import { api, API_URL } from "../lib/api.js";
 import { useAuth } from "../state/auth.jsx";
 
+const AtIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+  </svg>
+);
+
+const KeyIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m21 2-2 2" />
+    <circle cx="10" cy="14" r="8" />
+    <path d="m21 2-2 2" />
+    <path d="m21 2-9.6 9.6" />
+    <path d="m19 10 2-2" />
+  </svg>
+);
+
 const EyeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
     <circle cx="12" cy="12" r="3" />
   </svg>
 );
 
 const EyeOffIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24" />
     <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68" />
     <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61" />
@@ -71,28 +88,38 @@ export default function Login() {
         transition={{ duration: 0.5 }}
       >
         {/* Left Side - Illustration/Branding */}
-        <div className="md:w-5/12 bg-slate-900 px-10 py-16 text-white flex flex-col justify-center relative overflow-hidden text-center md:text-left">
+        <div className="md:w-5/12 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 px-10 py-16 text-white flex flex-col justify-center relative overflow-hidden text-center md:text-left">
           {/* Decorative shapes */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/20 rounded-full translate-x-1/3 -translate-y-1/3 blur-3xl" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/20 rounded-full translate-x-1/3 -translate-y-1/3 blur-3xl" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full -translate-x-1/3 translate-y-1/3 blur-3xl opacity-50" />
           
           <div className="relative z-10 space-y-8">
-            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-4xl mx-auto md:mx-0 backdrop-blur-md border border-white/10 shadow-xl">
-              👋
-            </div>
+            <motion.div 
+              className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-4xl mx-auto md:mx-0 backdrop-blur-md border border-white/10 shadow-xl"
+              whileHover={{ rotate: 360, scale: 1.1 }}
+              transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            >
+              🎯
+            </motion.div>
             <div className="space-y-4">
-              <h2 className="text-4xl font-black tracking-tight leading-tight">Welcome Back!</h2>
+              <h2 className="text-4xl font-black tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">
+                Welcome Back!
+              </h2>
               <p className="text-slate-400 text-lg leading-relaxed font-medium">
                 Sign in to continue your career journey and access personalized guidance.
               </p>
             </div>
             <div className="pt-8 flex flex-col gap-4">
-               <div className="flex items-center gap-3 text-sm text-slate-400">
-                  <span className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">✔</span>
+               <div className="flex items-center gap-3 text-sm text-slate-300 font-medium">
+                  <span className="w-6 h-6 rounded-full bg-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </span>
                   Personalized Roadmaps
                </div>
-               <div className="flex items-center gap-3 text-sm text-slate-400">
-                  <span className="w-6 h-6 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400">✔</span>
+               <div className="flex items-center gap-3 text-sm text-slate-300 font-medium">
+                  <span className="w-6 h-6 rounded-full bg-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-[0_0_15px_rgba(99,102,241,0.2)]">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </span>
                   Exclusive Course Discounts
                </div>
             </div>
@@ -113,14 +140,16 @@ export default function Login() {
             </div>
 
             <form onSubmit={onSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 ml-1">Email Address</label>
-                <div className="relative group">
-                  <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-indigo-500 transition-colors">
-                    📧
-                  </span>
+              <div className="space-y-2 group">
+                <div className="flex items-center gap-2 ml-1 text-slate-400 group-focus-within:text-indigo-500 transition-colors font-semibold">
+                  <div className="text-indigo-500 bg-indigo-50 p-1.5 rounded-lg">
+                    <AtIcon />
+                  </div>
+                  <label className="text-sm font-bold text-slate-700">Email Address</label>
+                </div>
+                <div className="relative">
                   <input
-                    className="input pl-11"
+                    className="input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@email.com"
@@ -130,19 +159,21 @@ export default function Login() {
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 group">
                 <div className="flex items-center justify-between ml-1">
-                  <label className="text-sm font-bold text-slate-700">Password</label>
+                  <div className="flex items-center gap-2 text-slate-400 group-focus-within:text-indigo-500 transition-colors font-semibold">
+                    <div className="text-amber-500 bg-amber-50 p-1.5 rounded-lg">
+                      <KeyIcon />
+                    </div>
+                    <label className="text-sm font-bold text-slate-700">Password</label>
+                  </div>
                   <Link to="/forgot-password" className="text-xs font-bold text-indigo-600 hover:text-indigo-700 transition-colors">
                     Forgot password?
                   </Link>
                 </div>
-                <div className="relative group">
-                  <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-indigo-500 transition-colors">
-                    🔒
-                  </span>
+                <div className="relative">
                   <input
-                    className="input pl-11 pr-12"
+                    className="input pr-12"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
