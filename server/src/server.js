@@ -1,4 +1,12 @@
 import "dotenv/config";
+
+if (!process.env.JWT_SECRET || process.env.JWT_SECRET === "change_this_to_a_long_random_secret") {
+  console.error("\x1b[31m%s\x1b[0m", "FATAL ERROR: JWT_SECRET is not set correctly in .env file.");
+  console.error("Please set a secure JWT_SECRET in server/.env and RESTART the server.");
+  // We don't exit(1) immediately to allow the user to see the logs, 
+  // but most auth features will fail.
+}
+
 import express from "express";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -46,7 +54,7 @@ app.use(cors({
 
 // Sessions required for OAuth "state" flow (simple dev setup)
 app.use(session({
-  secret: process.env.JWT_SECRET || "session_secret",
+  secret: process.env.JWT_SECRET || "fallback_session_secret_change_me",
   resave: false,
   saveUninitialized: false
 }));
