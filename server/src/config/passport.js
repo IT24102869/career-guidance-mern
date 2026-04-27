@@ -15,8 +15,12 @@ passport.deserializeUser(async (id, done) => {
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CALLBACK_URL } = process.env;
 
-if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === "your_google_client_id") {
-  console.warn("Google OAuth not configured — skipping Google strategy");
+if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === "your_google_client_id" || !GOOGLE_CLIENT_SECRET || !GOOGLE_CALLBACK_URL) {
+  const missing = [];
+  if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === "your_google_client_id") missing.push("GOOGLE_CLIENT_ID");
+  if (!GOOGLE_CLIENT_SECRET) missing.push("GOOGLE_CLIENT_SECRET");
+  if (!GOOGLE_CALLBACK_URL) missing.push("GOOGLE_CALLBACK_URL");
+  console.warn(`[Passport] Google OAuth skipped. Missing: ${missing.join(", ")}`);
 } else {
 
 passport.use(new GoogleStrategy(
@@ -67,8 +71,12 @@ passport.use(new GoogleStrategy(
 
 const { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_CALLBACK_URL } = process.env;
 
-if (!GITHUB_CLIENT_ID || GITHUB_CLIENT_ID === "your_github_client_id") {
-  console.warn("GitHub OAuth not configured — skipping GitHub strategy");
+if (!GITHUB_CLIENT_ID || GITHUB_CLIENT_ID === "your_github_client_id" || !GITHUB_CLIENT_SECRET || !GITHUB_CALLBACK_URL) {
+  const missing = [];
+  if (!GITHUB_CLIENT_ID || GITHUB_CLIENT_ID === "your_github_client_id") missing.push("GITHUB_CLIENT_ID");
+  if (!GITHUB_CLIENT_SECRET) missing.push("GITHUB_CLIENT_SECRET");
+  if (!GITHUB_CALLBACK_URL) missing.push("GITHUB_CALLBACK_URL");
+  console.warn(`[Passport] GitHub OAuth skipped. Missing: ${missing.join(", ")}`);
 } else {
   passport.use(new GitHubStrategy(
     {

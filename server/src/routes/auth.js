@@ -9,11 +9,6 @@ import { sendEmail } from "../utils/email.js";
 
 const router = express.Router();
 const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
-const isGoogleOAuthConfigured =
-  Boolean(process.env.GOOGLE_CLIENT_ID) &&
-  process.env.GOOGLE_CLIENT_ID !== "your_google_client_id" &&
-  Boolean(process.env.GOOGLE_CLIENT_SECRET) &&
-  Boolean(process.env.GOOGLE_CALLBACK_URL);
 
 function redirectWithAuthError(res, route, errorCode) {
   const safeRoute = route === "register" ? "register" : "login";
@@ -21,8 +16,27 @@ function redirectWithAuthError(res, route, errorCode) {
 }
 
 function hasGoogleStrategy() {
-  return typeof passport._strategy === "function" && Boolean(passport._strategy("google"));
+  return Boolean(passport._strategies && passport._strategies.google);
 }
+
+const isGoogleOAuthConfigured = (() => {
+  const isConfigured = 
+    Boolean(process.env.GOOGLE_CLIENT_ID) &&
+    process.env.GOOGLE_CLIENT_ID !== "your_google_client_id" &&
+    Boolean(process.env.GOOGLE_CLIENT_SECRET) &&
+    Boolean(process.env.GOOGLE_CALLBACK_URL);
+  
+  if (!isConfigured) {
+    const missing = [];
+    if (!process.env.GOOGLE_CLIENT_ID || process.env.GOOGLE_CLIENT_ID === "your_google_client_id") missing.push("GOOGLE_CLIENT_ID");
+    if (!process.env.GOOGLE_CLIENT_SECRET) missing.push("GOOGLE_CLIENT_SECRET");
+    if (!process.env.GOOGLE_CALLBACK_URL) missing.push("GOOGLE_CALLBACK_URL");
+    if (missing.length > 0) {
+      console.warn(`[Auth] Google OAuth is not fully configured. Missing: ${missing.join(", ")}`);
+    }
+  }
+  return isConfigured;
+})();
 
 // Local register
 router.post("/register", async (req, res, next) => {
@@ -135,15 +149,28 @@ router.get("/google/failure", (req, res) => {
   return redirectWithAuthError(res, mode, "google_auth_failed");
 });
 
-const isGitHubOAuthConfigured =
-  Boolean(process.env.GITHUB_CLIENT_ID) &&
-  process.env.GITHUB_CLIENT_ID !== "your_github_client_id" &&
-  Boolean(process.env.GITHUB_CLIENT_SECRET) &&
-  Boolean(process.env.GITHUB_CALLBACK_URL);
-
 function hasGitHubStrategy() {
-  return typeof passport._strategy === "function" && Boolean(passport._strategy("github"));
+  return Boolean(passport._strategies && passport._strategies.github);
 }
+
+const isGitHubOAuthConfigured = (() => {
+  const isConfigured = 
+    Boolean(process.env.GITHUB_CLIENT_ID) &&
+    process.env.GITHUB_CLIENT_ID !== "your_github_client_id" &&
+    Boolean(process.env.GITHUB_CLIENT_SECRET) &&
+    Boolean(process.env.GITHUB_CALLBACK_URL);
+  
+  if (!isConfigured) {
+    const missing = [];
+    if (!process.env.GITHUB_CLIENT_ID || process.env.GITHUB_CLIENT_ID === "your_github_client_id") missing.push("GITHUB_CLIENT_ID");
+    if (!process.env.GITHUB_CLIENT_SECRET) missing.push("GITHUB_CLIENT_SECRET");
+    if (!process.env.GITHUB_CALLBACK_URL) missing.push("GITHUB_CALLBACK_URL");
+    if (missing.length > 0) {
+      console.warn(`[Auth] GitHub OAuth is not fully configured. Missing: ${missing.join(", ")}`);
+    }
+  }
+  return isConfigured;
+})();
 
 // GitHub OAuth start
 router.get("/github", (req, res, next) => {
