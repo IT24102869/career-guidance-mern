@@ -27,6 +27,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const app = express();
 
+// Trust proxy for secure cookies and correct redirect URLs behind Render's proxy
+app.set("trust proxy", 1);
+
 // DB
 await connectDB();
 initCronJobs();
