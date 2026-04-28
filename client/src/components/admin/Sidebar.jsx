@@ -25,9 +25,9 @@ export default function Sidebar() {
   return (
     <aside className="admin-sidebar">
       <div className="admin-sidebar-brand">
-        <span className="admin-logo">M</span>
+        <span className="admin-logo">C</span>
         <div>
-          <strong>Moosika</strong>
+          <strong>Career Guidance</strong>
           <span className="admin-sidebar-sub">Admin Panel</span>
         </div>
       </div>

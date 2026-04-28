@@ -56,8 +56,8 @@ export default function AdminLogin() {
     <div className="admin-login-page">
       <div className="admin-login-card card">
         <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <span className="admin-logo" style={{ fontSize: 40, width: 64, height: 64, lineHeight: "64px" }}>M</span>
-          <h2 style={{ margin: "12px 0 4px" }}>Moosika Admin</h2>
+          <span className="admin-logo" style={{ fontSize: 40, width: 64, height: 64, lineHeight: "64px" }}>C</span>
+          <h2 style={{ margin: "12px 0 4px" }}>Career Guidance Admin Dashboard</h2>
           <p className="small">Sign in to the admin panel</p>
         </div>
 
@@ -68,7 +68,7 @@ export default function AdminLogin() {
               className="input"
               name="email"
               type="email"
-              placeholder="admin@moosika.com"
+              placeholder="admin@careerguidance.com"
               value={form.email}
               onChange={onChange}
             />
